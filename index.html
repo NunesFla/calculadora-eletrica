@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimensionamento Elétrico Profissional</title>
     
-    <!-- Configurações do PWA (Instalação e Ícones) -->
+    <!-- Links para forçar o ícone no navegador e no iPhone -->
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="./icon.png">
+    <link rel="shortcut icon" type="image/png" href="./icon.png">
+    <link rel="apple-touch-icon" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon.png">
     
-    <!-- Meta tags específicas para o iOS (iPhone) rodar como App -->
+    <!-- Configurações de Aplicativo para iPhone -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Dim. Elétrico">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -186,6 +187,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -358,13 +360,12 @@
         });
     }
 
-    // Código de inicialização para permitir a instalação do PWA
+    // Ativador do PWA
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
             .then(() => console.log('PWA Pronto!'))
             .catch((err) => console.log('Erro PWA:', err));
     }
 </script>
-
 </body>
 </html>
