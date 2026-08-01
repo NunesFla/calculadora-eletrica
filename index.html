@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimensionamento Elétrico Profissional</title>
+    
+    <!-- Link para ativação do PWA (Instalação) -->
+    <link rel="manifest" href="manifest.json">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -343,6 +347,13 @@
         }).catch(() => {
             alert("Erro ao copiar automaticamente. Selecione e copie o resultado.");
         });
+    }
+
+    // Código de inicialização para permitir a instalação do PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(() => console.log('PWA Pronto!'))
+            .catch((err) => console.log('Erro PWA:', err));
     }
 </script>
 
