@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1_eletrica';
+const CACHE_NAME = 'v2_eletrica';
 const ASSETS = [
   './',
   './index.html',
