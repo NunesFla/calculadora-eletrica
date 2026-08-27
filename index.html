@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dimensionamento Elétrico Profissional</title>
     
-    <!-- Links corrigidos usando servidor externo para garantir a exibição no iPhone -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="https://flaticon.com">
     <link rel="shortcut icon" type="image/png" href="https://flaticon.com">
@@ -13,7 +12,6 @@
     <link rel="apple-touch-icon" sizes="152x152" href="https://flaticon.com">
     <link rel="apple-touch-icon" sizes="180x180" href="https://flaticon.com">
     
-    <!-- Configurações de Aplicativo para iPhone -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Dim. Elétrico">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,7 +35,7 @@
         </select>
     </div>
 
-    <div class="form-group campo-motor" id="grupo-fase">
+    <div class="form-group campo-motor" id="grupo-fase" style="display: none;">
         <label for="fase">Tipo de Alimentação do Motor</label>
         <select id="fase">
             <option value="monofasico">Monofásico / Bifásico</option>
@@ -46,16 +44,16 @@
     </div>
 
     <div class="form-group">
-        <label id="label-quantidade" for="quantidade">Quantidade</label>
+        <label id="label-quantidade" for="quantidade">Qtd. de Lâmpadas:</label>
         <input type="number" id="quantidade" min="1" value="1" required>
     </div>
 
     <div class="form-group">
-        <label id="label-potencia" for="potencia">Potência Unitária (W)</label>
-        <input type="number" id="potencia" min="1" placeholder="Ex: 5500" required>
+        <label id="label-potencia" for="potencia">Potência das Lâmpadas (W):</label>
+        <input type="number" id="potencia" min="1" placeholder="Ex: 100" required>
     </div>
 
-    <div class="form-group campo-motor" id="grupo-fp">
+    <div class="form-group campo-motor" id="grupo-fp" style="display: none;">
         <label for="fp">Fator de Potência (cos φ)</label>
         <input type="number" id="fp" min="0.1" max="1" step="0.01" value="0.85">
     </div>
@@ -71,9 +69,12 @@
         </select>
     </div>
 
-    <button class="btn-calc" onclick="calcular()">Calcular Circuito</button>
+    <div class="btn-group">
+        <button class="btn-calc" onclick="calcular()">Calcular Circuito</button>
+        <button class="btn-clear" onclick="limparCampos()">🧹 Limpar</button>
+    </div>
 
-    <div class="result-box" id="resultado">
+    <div class="result-box" id="resultado" style="display: none;">
         <div class="result-row">
             <span class="result-label">Carga total informada:</span>
             <span class="result-value" id="res-carga">0W</span>
@@ -97,25 +98,32 @@
     function alternarCampos() {
         const tipo = document.getElementById('tipo').value;
         const grupoFp = document.getElementById('grupo-fp');
-        const grupoFase = document.getElementById('grupo-fase');
+        const groupFase = document.getElementById('grupo-fase');
         const labelPotencia = document.getElementById('label-potencia');
         const labelQuantidade = document.getElementById('label-quantidade');
         const inputQuantidade = document.getElementById('quantidade');
         const inputPotencia = document.getElementById('potencia');
 
+        document.getElementById('resultado').style.display = 'none';
+        
+        inputQuantidade.value = "1";
+        inputPotencia.value = ""; 
+        document.getElementById('fp').value = "0.85";
+        document.getElementById('fase').value = "monofasico";
+        document.getElementById('voltagem').value = "220";
+
         if (tipo === 'motor') {
             grupoFp.style.display = 'block';
-            grupoFase.style.display = 'block';
+            groupFase.style.display = 'block';
             labelPotencia.innerText = "Potência do Motor (cv):";
             labelQuantidade.innerText = "Qtd. de Motores:";
             inputPotencia.placeholder = "Ex: 2";
         } else {
             grupoFp.style.display = 'none';
-            grupoFase.style.display = 'none';
+            groupFase.style.display = 'none';
             if (tipo === 'chuveiro') {
                 labelPotencia.innerText = "Potência do Chuveiro (W):";
                 labelQuantidade.innerText = "Qtd. de Chuveiros:";
-                inputQuantidade.value = "1";
                 inputPotencia.placeholder = "Ex: 5500";
             } else {
                 labelPotencia.innerText = "Potência das Lâmpadas (W):";
@@ -123,6 +131,11 @@
                 inputPotencia.placeholder = "Ex: 100";
             }
         }
+    }
+
+    function limparCampos() {
+        document.getElementById('tipo').value = "lampada";
+        alternarCampos();
     }
 
     function calcular() {
@@ -169,7 +182,6 @@
         else if (s >= 312 && s < 361) bitola = "240,0 mm²";
         else bitola = "300 mm²";
 
-        // REGRA NBR 5410 MODIFICADA: Garante bitola mínima de 2,5 mm² apenas para chuveiro
         if (tipo === 'chuveiro' && bitola === "1,5 mm²") {
             bitola = "2,5 mm²";
         }
