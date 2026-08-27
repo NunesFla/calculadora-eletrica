@@ -4,7 +4,7 @@ Uma ferramenta web prática e rápida desenvolvida para auxiliar eletricistas na
 
 Com apenas alguns cliques, a aplicação calcula o consumo em amperes e recomenda a bitola ideal do cabo para a instalação, otimizando o tempo de profissionais com agendas cheias.
 
-🔗 **Acesse a aplicação aqui:** [Seu-Usuario].github.io/[Nome-do-Repositorio]
+🔗 **Acesse a aplicação aqui:** https://github.com/NunesFla/calculadora-eletrica/
 
 ---
 
