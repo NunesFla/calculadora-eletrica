@@ -19,7 +19,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <link rel="stylesheet" href="style.css">
-   
 </head>
 <body>
 
@@ -102,14 +101,14 @@
         const labelPotencia = document.getElementById('label-potencia');
         const labelQuantidade = document.getElementById('label-quantidade');
         const inputQuantidade = document.getElementById('quantidade');
-        const inputPotencia = document.getElementById('potencia'); // Captura o campo da potência
+        const inputPotencia = document.getElementById('potencia');
 
         if (tipo === 'motor') {
             grupoFp.style.display = 'block';
             grupoFase.style.display = 'block';
             labelPotencia.innerText = "Potência do Motor (cv):";
             labelQuantidade.innerText = "Qtd. de Motores:";
-            inputPotencia.placeholder = "Ex: 2"; // Altera o exemplo para CV
+            inputPotencia.placeholder = "Ex: 2";
         } else {
             grupoFp.style.display = 'none';
             grupoFase.style.display = 'none';
@@ -117,11 +116,11 @@
                 labelPotencia.innerText = "Potência do Chuveiro (W):";
                 labelQuantidade.innerText = "Qtd. de Chuveiros:";
                 inputQuantidade.value = "1";
-                inputPotencia.placeholder = "Ex: 5500"; // Altera o exemplo para Chuveiro
+                inputPotencia.placeholder = "Ex: 5500";
             } else {
                 labelPotencia.innerText = "Potência das Lâmpadas (W):";
                 labelQuantidade.innerText = "Qtd. de Lâmpadas:";
-                inputPotencia.placeholder = "Ex: 100"; // Altera o exemplo para Lâmpadas
+                inputPotencia.placeholder = "Ex: 100";
             }
         }
     }
@@ -170,8 +169,8 @@
         else if (s >= 312 && s < 361) bitola = "240,0 mm²";
         else bitola = "300 mm²";
 
-        // REGRA NBR 5410: Garante bitola mínima de 2,5 mm² para força/motores
-        if ((tipo === 'motor' || tipo === 'chuveiro') && bitola === "1,5 mm²") {
+        // REGRA NBR 5410 MODIFICADA: Garante bitola mínima de 2,5 mm² apenas para chuveiro
+        if (tipo === 'chuveiro' && bitola === "1,5 mm²") {
             bitola = "2,5 mm²";
         }
 
@@ -188,7 +187,7 @@
         document.getElementById('res-corrente').innerText = `${s.toFixed(2)} A`;
         document.getElementById('res-cabo').innerText = bitola;
 
-        const infoCv = (tipo === 'motor') ? ` (${q * p}cv)` : ''
+        const infoCv = (tipo === 'motor') ? ` (${q * p}cv)` : '';
         
         textoCopia = `⚡ *Dimensionamento Técnico*\n` +
                      `• Carga: ${labelTipo}${infoAdicional}\n` +
