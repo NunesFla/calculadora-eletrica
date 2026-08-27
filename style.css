@@ -164,3 +164,31 @@
         .campo-motor {
             display: none;
         }
+
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-calc { 
+            flex: 2; 
+        }
+
+        .btn-clear {
+            flex: 1;
+            background-color: #475569;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-clear:hover { 
+            background-color: #334155; 
+        }
